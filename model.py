@@ -4,17 +4,11 @@ from collections import OrderedDict
 import numpy as np
 import torch
 import torch.nn as nn
-from pytorch_lightning.callbacks.early_stopping import EarlyStopping
-from pytorch_lightning.callbacks import ModelCheckpoint
 import torch.nn.functional as F
 import torchvision
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-import pytorch_lightning as pl
-from pytorch_lightning.core import LightningModule
-from pytorch_lightning.trainer import Trainer
-from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.nn import functional as F
 from torchsummaryX import summary
 import torch
@@ -25,8 +19,6 @@ from fastai.tabular.all import *
 import pickle
 import os
 import pytorch_lightning as pl
-from pytorch_lightning.callbacks.early_stopping import EarlyStopping
-from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.nn import functional as F
 from torchsummaryX import summary
 import pandas as pd
@@ -38,10 +30,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import LabelBinarizer
 import pickle
-import pytorch_lightning as pl
 import numpy as np
-from pytorch_lightning.callbacks.early_stopping import EarlyStopping
-from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.nn import functional as F
 from torchsummaryX import summary
 #matplotlib 패키지 한글 깨짐 처리 시작
