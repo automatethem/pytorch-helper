@@ -1,7 +1,7 @@
 from setuptools import *
 
 LONG_DESC = """
-This is pytorch utilities
+This is pytorch helper
 """
 
 setup(name='pytorch-helper',
