@@ -7,7 +7,7 @@ def requirements():
 
 setuptools.setup(
 	name='pytorch-helper',
-	version='0.0.6',
+	version='0.0.7',
 	description='Pytorch helper',
 	long_description=open('README.md').read(),
 	author='Sang Ki Kwon',
