@@ -4,12 +4,12 @@ LONG_DESC = """
 This is pytorch utilities
 """
 
-setup(name='pytorch_utils',
+setup(name='pytorch-helper',
 	  version='0.0.1',
-	  description='Pytorch utilities',
+	  description='Pytorch helper',
 	  long_description=LONG_DESC,
 	  author='Sang Ki Kwon',
-	  url='https://github.com/automatethem/pytorch_utils',
+	  url='https://github.com/automatethem/pytorch-helper',
 	  install_requires=['torchsummaryX'],
 	  author_email='automatethem@gmail.com',
 	  license='MIT',
