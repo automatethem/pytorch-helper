@@ -28,8 +28,33 @@ class DotProduct(torch.nn.Module):
 class RNNLastOutput(torch.nn.Module):
     def __init__(self, input_size=1, hidden_size=32, batch_first=True):
         super().__init__()
+        self.rnn = torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+
+    def forward(self, x):
+        #print(x.shape) #torch.Size([2, 7, 1])
+        output, _ = self.rnn(x)
+        #print(output.shape) #torch.Size([2, 7, 32])
+        x = output[:,-1]
+        #print(x.shape) #torch.Size([2, 32])
+        return x
+    
+class LSTMLastOutput(torch.nn.Module):
+    def __init__(self, input_size=1, hidden_size=32, batch_first=True):
+        super().__init__()
         self.rnn = torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
-        #self.rnn = torch.nn.GRU(input_size 32, hidden_size=32, batch_first=True)
+
+    def forward(self, x):
+        #print(x.shape) #torch.Size([2, 7, 1])
+        output, _ = self.rnn(x)
+        #print(output.shape) #torch.Size([2, 7, 32])
+        x = output[:,-1]
+        #print(x.shape) #torch.Size([2, 32])
+        return x
+
+class GRULastOutput(torch.nn.Module):
+    def __init__(self, input_size=1, hidden_size=32, batch_first=True):
+        super().__init__()
+        self.rnn = torch.nn.GRU(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
 
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
