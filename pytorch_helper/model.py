@@ -42,7 +42,7 @@ class LSTMLastOutput(torch.nn.Module):
     def __init__(self, input_size=1, hidden_size=32, batch_first=True):
         super().__init__()
         self.rnn = torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
-
+ 
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
         output, _ = self.rnn(x)
