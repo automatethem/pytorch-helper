@@ -32,7 +32,7 @@ class RNNLastOutput(torch.nn.Module):
 
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
-        output, _ = self.rnn(x)
+        output, (hidden, cell) = self.rnn(x)
         #print(output.shape) #torch.Size([2, 7, 32])
         x = output[:,-1]
         #print(x.shape) #torch.Size([2, 32])
@@ -45,7 +45,7 @@ class LSTMLastOutput(torch.nn.Module):
  
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
-        output, _ = self.rnn(x)
+        output, (hidden, cell) = self.rnn(x)
         #print(output.shape) #torch.Size([2, 7, 32])
         x = output[:,-1]
         #print(x.shape) #torch.Size([2, 32])
@@ -58,7 +58,7 @@ class GRULastOutput(torch.nn.Module):
 
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
-        output, _ = self.rnn(x)
+        output, (hidden, cell) = self.rnn(x)
         #print(output.shape) #torch.Size([2, 7, 32])
         x = output[:,-1]
         #print(x.shape) #torch.Size([2, 32])
