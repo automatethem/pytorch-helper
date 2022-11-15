@@ -33,9 +33,9 @@ class RNNLastOutput(torch.nn.Module):
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
         output, (hidden, cell) = self.rnn(x)
-        #print(output.shape) #torch.Size([2, 7, 32])
+        #print(output.shape) #torch.Size([2, 7, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         x = output[:,-1]
-        #print(x.shape) #torch.Size([2, 32])
+        #print(x.shape) #torch.Size([2, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
     
 class LSTMLastOutput(torch.nn.Module):
@@ -46,9 +46,9 @@ class LSTMLastOutput(torch.nn.Module):
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
         output, (hidden, cell) = self.rnn(x)
-        #print(output.shape) #torch.Size([2, 7, 32])
+        #print(output.shape) #torch.Size([2, 7, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         x = output[:,-1]
-        #print(x.shape) #torch.Size([2, 32])
+        #print(x.shape) #torch.Size([2, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
 
 class GRULastOutput(torch.nn.Module):
@@ -59,7 +59,7 @@ class GRULastOutput(torch.nn.Module):
     def forward(self, x):
         #print(x.shape) #torch.Size([2, 7, 1])
         output, (hidden, cell) = self.rnn(x)
-        #print(output.shape) #torch.Size([2, 7, 32])
+        #print(output.shape) #torch.Size([2, 7, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         x = output[:,-1]
-        #print(x.shape) #torch.Size([2, 32])
+        #print(x.shape) #torch.Size([2, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
