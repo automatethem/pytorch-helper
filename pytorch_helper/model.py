@@ -30,11 +30,14 @@ class RNNLastOutput(torch.nn.Module):
         super().__init__()
         #print(input_size) #300
         #print(hidden_size) #32
-        self.rnn = torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
 
+        self.layer = torch.nn.Sequential(
+            torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+        )
+        
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, hidden = self.rnn(x)
+        output, hidden = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         #print(hidden.shape) #torch.Size([1, 32, 32]) #containing the final hidden state for each element in the batch.
         #x = output[:,-1]
@@ -47,11 +50,13 @@ class LSTMLastOutput(torch.nn.Module):
         super().__init__()
         #print(input_size) #300
         #print(hidden_size) #32
-        self.rnn = torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+        self.layer = torch.nn.Sequential(
+            torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+        )
  
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden, cell) = self.rnn(x)
+        output, (hidden, cell) = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         #print(hidden.shape) #torch.Size([1, 32, 32])
         #print(cell.shape) #torch.Size([1, 32, 32])
@@ -65,11 +70,13 @@ class GRULastOutput(torch.nn.Module):
         super().__init__()
         #print(input_size) #300
         #print(hidden_size) #32
-        self.rnn = torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
- 
+        self.layer = torch.nn.Sequential(
+            torch.nn.GRU(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+        )
+            
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden, cell) = self.rnn(x)
+        output, (hidden, cell) = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
         #print(hidden.shape) #torch.Size([1, 32, 32])
         #print(cell.shape) #torch.Size([1, 32, 32])
