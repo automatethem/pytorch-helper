@@ -37,7 +37,7 @@ class RNNLastOutput(torch.nn.Module):
         
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, hidden_state = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        output, hidden_state = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
         #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32]) 
         #x = output[:,-1]
@@ -56,7 +56,7 @@ class LSTMLastOutput(torch.nn.Module):
  
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        output, (hidden_state, cell_state) = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
         #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
@@ -76,7 +76,7 @@ class GRULastOutput(torch.nn.Module):
             
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        output, (hidden_state, cell_state) = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
         #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
