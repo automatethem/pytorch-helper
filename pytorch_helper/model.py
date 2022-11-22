@@ -41,7 +41,7 @@ class RNNLastOutput(torch.nn.Module):
         #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32]) 
         #x = output[:,-1]
-        x = hidden_state[0]
+        x = hidden_state[-1]
         #print(x.shape) #torch.Size([32, 32]) 
         return x
     
@@ -61,7 +61,7 @@ class LSTMLastOutput(torch.nn.Module):
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
-        x = hidden_state[0]
+        x = hidden_state[-1]
         #print(x.shape) #torch.Size([32, 32]) 
         return x
 
@@ -81,6 +81,6 @@ class GRULastOutput(torch.nn.Module):
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
-        x = hidden_state[0]
+        x = hidden_state[-1]
         #print(x.shape) #torch.Size([32, 32]) 
         return x
