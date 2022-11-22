@@ -44,8 +44,8 @@ class RNNLastOutput(torch.nn.Module):
 class LSTMLastOutput(torch.nn.Module):
     def __init__(self, input_size=1, hidden_size=32, batch_first=True):
         super().__init__()
-        print(input_size) #300
-        print(hidden_size) #32
+        #print(input_size) #300
+        #print(hidden_size) #32
         self.rnn = torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
  
     def forward(self, x):
