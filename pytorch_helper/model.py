@@ -32,17 +32,17 @@ class RNNLastOutput(torch.nn.Module):
         #print(hidden_size) #32
 
         self.layer = torch.nn.Sequential(
-            torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+            torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
         )
         
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, hidden_state = self.layer(x)
-        #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
-        #print(hidden_state.shape) #torch.Size([1, 32, 32]) #containing the final hidden state for each element in the batch.
+        output, hidden_state = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        #print(output.shape) #torch.Size([32, 54, 32]) 
+        #print(hidden_state.shape) #torch.Size([1, 32, 32]) 
         #x = output[:,-1]
         x = hidden_state[0]
-        #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
+        #print(x.shape) #torch.Size([32, 32]) 
         return x
     
 class LSTMLastOutput(torch.nn.Module):
@@ -51,18 +51,18 @@ class LSTMLastOutput(torch.nn.Module):
         #print(input_size) #300
         #print(hidden_size) #32
         self.layer = torch.nn.Sequential(
-            torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+            torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
         )
  
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x)
-        #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
+        output, (hidden_state, cell_state) = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
         x = hidden_state[0]
-        #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
+        #print(x.shape) #torch.Size([32, 32]) 
         return x
 
 class GRULastOutput(torch.nn.Module):
@@ -71,16 +71,16 @@ class GRULastOutput(torch.nn.Module):
         #print(input_size) #300
         #print(hidden_size) #32
         self.layer = torch.nn.Sequential(
-            torch.nn.GRU(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first)
+            torch.nn.GRU(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
         )
             
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x)
-        #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
+        output, (hidden_state, cell_state) = self.layer(x) #output: 각 토큰(숫자, 문자, 단어)에 대한 상태, hidden_state: 마지막 토큰(숫자, 문자, 단어)에 대한 상태
+        #print(output.shape) #torch.Size([32, 54, 32]) 
         #print(hidden_state.shape) #torch.Size([1, 32, 32])
         #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
         x = hidden_state[0]
-        #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
+        #print(x.shape) #torch.Size([32, 32]) 
         return x
