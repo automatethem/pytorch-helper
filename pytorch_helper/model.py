@@ -37,11 +37,11 @@ class RNNLastOutput(torch.nn.Module):
         
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, hidden = self.layer(x)
+        output, hidden_state = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
-        #print(hidden.shape) #torch.Size([1, 32, 32]) #containing the final hidden state for each element in the batch.
+        #print(hidden_state.shape) #torch.Size([1, 32, 32]) #containing the final hidden state for each element in the batch.
         #x = output[:,-1]
-        x = hidden[0]
+        x = hidden_state[0]
         #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
     
@@ -56,12 +56,12 @@ class LSTMLastOutput(torch.nn.Module):
  
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden, cell) = self.layer(x)
+        output, (hidden_state, cell_state) = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
-        #print(hidden.shape) #torch.Size([1, 32, 32])
-        #print(cell.shape) #torch.Size([1, 32, 32])
+        #print(hidden_state.shape) #torch.Size([1, 32, 32])
+        #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
-        x = hidden[0]
+        x = hidden_state[0]
         #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
 
@@ -76,11 +76,11 @@ class GRULastOutput(torch.nn.Module):
             
     def forward(self, x):
         #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden, cell) = self.layer(x)
+        output, (hidden_state, cell_state) = self.layer(x)
         #print(output.shape) #torch.Size([32, 54, 32]) #리턴값은 (배치 크기, 시퀀스 길이, 은닉 상태의 크기)
-        #print(hidden.shape) #torch.Size([1, 32, 32])
-        #print(cell.shape) #torch.Size([1, 32, 32])
+        #print(hidden_state.shape) #torch.Size([1, 32, 32])
+        #print(cell_state.shape) #torch.Size([1, 32, 32])
         #x = output[:,-1]
-        x = hidden[0]
+        x = hidden_state[0]
         #print(x.shape) #torch.Size([32, 32]) #(배치 크기, 은닉 상태의 크기)의 텐서로 크기가 변경됨. 즉, 마지막 time-step의 은닉 상태만 가져온다.
         return x
