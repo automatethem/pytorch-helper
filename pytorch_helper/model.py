@@ -85,3 +85,19 @@ class GRULastHiddenState(torch.nn.Module):
         #print(x)
         #print(x.shape) #torch.Size([8, 32])
         return x
+
+class DictToParameters(torch.nn.Module):
+    def __init__(self, layer):
+        super().__init__()
+        self.layer = layer
+
+    def forward(self, x):
+        return self.layer(**x)
+
+class SelectFromArray(torch.nn.Module):
+    def __init__(self, index=0):
+        super().__init__()
+        self.index = index
+
+    def forward(self, x):
+        return x[self.index]
