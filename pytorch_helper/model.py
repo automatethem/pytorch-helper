@@ -25,62 +25,50 @@ class DotProduct(torch.nn.Module):
         #print(dot_product.shape) #torch.Size([1, 1])
         return dot_product
         
-class RNNLastOutput(torch.nn.Module):
-    def __init__(self, input_size=1, hidden_size=32, batch_first=True):
+class RNNLastHiddenState(torch.nn.Module):
+    def __init__(self):
         super().__init__()
-        #print(input_size) #300
-        #print(hidden_size) #32
 
-        self.layer = torch.nn.Sequential(
-            torch.nn.RNN(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
-        )
-        
     def forward(self, x):
-        #print(x.shape) #torch.Size([32, 54, 300])
-        output, hidden_state = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
-        #print(output.shape) #torch.Size([32, 54, 32]) 
-        #print(hidden_state.shape) #torch.Size([1, 32, 32]) 
-        #x = output[:,-1]
+        output = x[0] #모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, 
+        hidden_state = x[1] #마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
+        #print(output.shape) #torch.Size([8, 380, 32]) 
+        #print(hidden_state.shape) #torch.Size([1, 8, 32])
+        x = output[:,-1]
+        #print(x)
         x = hidden_state[-1]
-        #print(x.shape) #torch.Size([32, 32]) 
-        return x
-    
-class LSTMLastOutput(torch.nn.Module):
-    def __init__(self, input_size=1, hidden_size=32, batch_first=True):
-        super().__init__()
-        #print(input_size) #300
-        #print(hidden_size) #32
-        self.layer = torch.nn.Sequential(
-            torch.nn.LSTM(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
-        )
- 
-    def forward(self, x):
-        #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
-        #print(output.shape) #torch.Size([32, 54, 32]) 
-        #print(hidden_state.shape) #torch.Size([1, 32, 32])
-        #print(cell_state.shape) #torch.Size([1, 32, 32])
-        #x = output[:,-1]
-        x = hidden_state[-1]
-        #print(x.shape) #torch.Size([32, 32]) 
+        #print(x)
+        #print(x.shape) #torch.Size([8, 32])
         return x
 
-class GRULastOutput(torch.nn.Module):
-    def __init__(self, input_size=1, hidden_size=32, batch_first=True):
+class LSTMLastHiddenState(torch.nn.Module):
+    def __init__(self):
         super().__init__()
-        #print(input_size) #300
-        #print(hidden_size) #32
-        self.layer = torch.nn.Sequential(
-            torch.nn.GRU(input_size=input_size, hidden_size=hidden_size, batch_first=batch_first) #토큰의 시쿼스 입력 -> 토큰의 시퀀스 출력, input_size: 입력 토큰의 차원, hidden_size: 출력 토큰의 차원
-        )
-            
+
     def forward(self, x):
-        #print(x.shape) #torch.Size([32, 54, 300])
-        output, (hidden_state, cell_state) = self.layer(x) #output: 모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, hidden_state: 마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
-        #print(output.shape) #torch.Size([32, 54, 32]) 
-        #print(hidden_state.shape) #torch.Size([1, 32, 32])
-        #print(cell_state.shape) #torch.Size([1, 32, 32])
-        #x = output[:,-1]
+        output = x[0] #모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, 
+        hidden_state, cell_state = x[1] #마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
+        #print(output.shape) #torch.Size([8, 380, 32]) 
+        #print(hidden_state.shape) #torch.Size([1, 8, 32])
+        x = output[:,-1]
+        #print(x)
         x = hidden_state[-1]
-        #print(x.shape) #torch.Size([32, 32]) 
+        #print(x)
+        #print(x.shape) #torch.Size([8, 32])
+        return x
+
+class GRULastHiddenState(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x):
+        output = x[0] #모든 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태, 
+        hidden_state = x[1] #마지막 타임 스텝(토큰: 숫자, 문자, 단어)의 숨은 상태
+        #print(output.shape) #torch.Size([8, 380, 32]) 
+        #print(hidden_state.shape) #torch.Size([1, 8, 32])
+        x = output[:,-1]
+        #print(x)
+        x = hidden_state[-1]
+        #print(x)
+        #print(x.shape) #torch.Size([8, 32])
         return x
